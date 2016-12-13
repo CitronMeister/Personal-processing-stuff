@@ -1,6 +1,6 @@
 // vars
 boolean keyz[] = new boolean [3];
-
+int gameState = 1;
 
 
 
