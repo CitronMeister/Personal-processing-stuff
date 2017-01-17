@@ -49,7 +49,7 @@ class creature {
     float scale = 0;
     scale = scale + size/1500;
     hunger = hunger - scale;
-    text(scale, width/2, height/2);
+    //text(scale, width/2, height/2);
   }
   void update() {
   }
