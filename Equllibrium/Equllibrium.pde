@@ -1,28 +1,40 @@
-creature c;
+menu m;
 ArrayList<creature> creature;
+ArrayList<vegetation> vegetation;
 
+// Check if sim is live or not
+boolean live = false;
 
+// debug int
 int debug;
 
 void setup() {
+  m = new menu();
   creature = new ArrayList<creature>();
-  size(500, 500);
+  vegetation = new ArrayList<vegetation>();
+  fullScreen(1);
+  //size(500, 500);
   noStroke();
   frameRate(100);
-  creature.add(new creature(width/2, height/2));
+  //creature.add(new creature(width/2, height/2));
 }
 
 void draw() {
-  background(71);
-  // Alle de ting der skal updates for creature :P
-  for (creature c : creature){
-    c.display();
+  if (live == false) {
+    m.display();
+  } else if (live == true) {
+    background(71);
+    // all the stuff needed to be updated on creature
+    for (creature c : creature) {
+      c.display();
+    }
+    // Update vegetation
+    for (vegetation v : vegetation) {
+      v.display();
+    }
+
+    // check if you are spawning vegetation or a creature
+    foodToCreature();
+    text("foodToCreature" + foodToCreature, width/2, height/2);
   }
-  
-  // check om det er food eller creature
-  foodToCreature();
-  text("foodToCreature" + foodToCreature, width/2, height/2);
-  
-  
-  
 }

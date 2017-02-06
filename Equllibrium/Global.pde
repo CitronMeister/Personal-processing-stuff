@@ -15,7 +15,7 @@ void mousePressed() {
     //bare en test pt
     pushStyle();
     fill(0, 0, 255);
-    creature.add(new creature(mouseX, mouseY));
+    vegetation.add(new vegetation(mouseX, mouseY));
     popStyle();
   }
 }
@@ -28,3 +28,9 @@ void foodToCreature() {
     }
   }
 }
+void push() {
+  pushStyle();
+} 
+void pop() {
+  popStyle();
+} // pop and push to make it easier for myself.
