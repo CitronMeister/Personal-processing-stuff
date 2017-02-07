@@ -1,11 +1,25 @@
 class creature {
   // vars
-
   boolean isAlive = false;
   float hunger = 200;
   float size = random(25, 100);
   float evolve = 50;
   float visibility = 200;
+
+
+  float maxSpeed;
+
+  // PVectors
+  PVector location;
+  PVector velocity;
+  PVector acceleration;
+  
+
+  creature(){
+  
+  
+  }
+  
 
 
 

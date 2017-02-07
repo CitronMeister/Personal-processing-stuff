@@ -3,7 +3,7 @@ vegitation v = new vegitation();
 
 
 void setup(){
-  fullScreen(1);
+  fullScreen(2);
 }
 
 void draw(){
