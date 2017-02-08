@@ -14,4 +14,12 @@ class vegetation {
     fill(255, 255, 255);
     popStyle();
   }
+  void locTrack(){
+    float locX = foodLocation.x;
+    float locY = foodLocation.y;
+    
+  }
+  PVector getLoc(){
+    return foodLocation;
+  } 
 }

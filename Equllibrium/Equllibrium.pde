@@ -1,4 +1,5 @@
 menu m;
+vegetation v = new vegetation(100, 100);
 ArrayList<creature> creature;
 ArrayList<vegetation> vegetation;
 
@@ -26,7 +27,6 @@ void draw() {
   if (live == false) {
     m.display();
   } else if (live == true) {
-    
     // target i created for the creatures to chase until i make them chase the vegetation and eachother.
     target = new PVector(mouseX, mouseY);
     background(71);
@@ -35,12 +35,16 @@ void draw() {
       c.display();
       c.update();
       c.target(target);
+      c.distance();
     }
     // Update vegetation
+    if(vegetation.size() < 100){
+      grow(1);
+    }
     for (vegetation v : vegetation) {
       v.display();
+      
     }
-
     // check if you are spawning vegetation or a creature
     foodToCreature();
     text("foodToCreature" + foodToCreature, width/2, height/2);

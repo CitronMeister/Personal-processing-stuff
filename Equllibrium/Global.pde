@@ -19,6 +19,14 @@ void mousePressed() {
     popStyle();
   }
 }
+
+void grow(int f) {
+  for (int i = 0; i < f; i++) {
+    vegetation.add(new vegetation(random(width),random(height)));
+  }
+}
+
+
 void foodToCreature() {
   if (keyPressed) {
     if (key == 'c') {
