@@ -1,7 +1,12 @@
-class menu{
+class menu {
 
 
-
-void display(){}
-void actions(){}
+  void controller() {
+    display();
+    actions();
+  }
+  void display() {
+  }
+  void actions() {
+  }
 }

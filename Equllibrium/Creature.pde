@@ -38,18 +38,29 @@ class creature {
   }
     
   void display() {
-    pushStyle();
-    fill(255, 0, 0);
-    ellipse(location.x, location.y, size, size);
-    fill(255, 255, 255);
-    // eyes
-    ellipse(location.x-10, location.y-22, 15, 15);
-    ellipse(location.x+10, location.y-22, 15, 15);
-    // pupils
-    fill(0, 0, 0);
-    ellipse(location.x-10, location.y-27, 8, 8);
-    ellipse(location.x+10, location.y-27, 8, 8);
-    popStyle();
+    float theta = velocity.heading() + PI/2;
+    fill(175);
+    stroke(0);
+    pushMatrix();
+    translate(location.x, location.y);
+    rotate(theta);
+    beginShape();
+    vertex(0, -size*2);
+    vertex(-size, size*2);
+    vertex(size, size*2);
+    endShape(CLOSE);
+    popMatrix();
+    //ellipse(location.x, location.y, size, size);
+    //fill(255, 255, 255);
+    //// eyes
+    //ellipse(location.x-10, location.y-22, 15, 15);
+    //ellipse(location.x+10, location.y-22, 15, 15);
+    //// pupils
+    //fill(0, 0, 0);
+    //ellipse(location.x-10, location.y-27, 8, 8);
+    //ellipse(location.x+10, location.y-27, 8, 8);
+   
+    
   }
   
   

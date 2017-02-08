@@ -1,5 +1,5 @@
 player p = new player();
-
+ui ui = new ui();
 
 
 void setup(){
@@ -10,4 +10,5 @@ void setup(){
 void draw(){
   background(50, 120, 200);  
   p.controller();
+  ui.controller();
 }

@@ -1,3 +1,4 @@
+// Currently vegetation is only for show. Creatures wont chase it just yet.
 class vegetation {
   PVector foodLocation;
   float x;
