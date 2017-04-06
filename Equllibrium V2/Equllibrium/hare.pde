@@ -1,7 +1,7 @@
 class hare extends creature{
-  
-  hare(loc){
-  super(loc.x,loc.y,meat);
+  Boolean meat = false;
+  hare(PVector loc){
+  super(loc.x,loc.y,this.meat);
   }
 
 }
