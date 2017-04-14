@@ -2,9 +2,8 @@
 
 // A list of creatures
 ArrayList<Creature> creatures;
-ArrayList<Wall> walls;
 
-float wallx1, wallx2, wally1, wally2;
+
 boolean creatingWall = false;
 boolean wallBuildingMode = false;
 int gridSnap = 32;
@@ -27,11 +26,9 @@ void setup() {
 
   // We are now making random creatures and storing them in an ArrayList
   creatures = new ArrayList<Creature>();
-  walls = new ArrayList<Wall>();
 
   // We are now making random creatures and storing them in an ArrayList
   creatures = new ArrayList<Creature>();
-  walls = new ArrayList<Wall>();
 
   // big creature
   for (int i = 0; i < 16; i++) {
@@ -42,17 +39,6 @@ void setup() {
   for (int i = 0; i < 16; i++) {
     addRandomPrey();
   }
-
-  //walls.add( new Wall(gridSnap, gridSnap, width-gridSnap, gridSnap) );
-  //walls.add( new Wall(width-gridSnap, gridSnap, width-gridSnap, height-gridSnap) );
-  //walls.add( new Wall(width-gridSnap, height-gridSnap, gridSnap, height-gridSnap) );
-  //walls.add( new Wall(gridSnap, height-gridSnap, gridSnap, gridSnap) );
-  //walls.add( new Wall(width/2, 100+gridSnap, width/2, height-100-gridSnap) );
-  //walls.add( new Wall(0, height/2, width/2-100-gridSnap, height/2) );
-  //walls.add( new Wall(width/2, height/3, width-100-gridSnap, height/3) );
-  //walls.add( new Wall(width/2+100+gridSnap, 2*height/3, width, 2*height/3) );
-  //walls.add( new Wall(100, 100, width/2-100, height/2-100) );
-  //walls.add( new Wall(100, height-100, width/2-100, height/2+100) );
 }
 
 void draw() {
@@ -63,24 +49,11 @@ void draw() {
     if (key == 'r') {
       setup();
     }
-    if (key == 'w') {
-      wallBuildingMode = true;
-    }
     if (key == 'f') {
       wallBuildingMode = false;
       creatingWall = false;
     }
   }
-
-  // draw grid snap cross
-  if ( wallBuildingMode == true ) {
-    stroke(0);
-    float snapX = round(mouseX/gridSnap)*gridSnap;
-    float snapY = round(mouseY/gridSnap)*gridSnap;
-    line(snapX-gridSnap/2, snapY, snapX+gridSnap/2, snapY);
-    line(snapX, snapY-gridSnap/2, snapX, snapY+gridSnap/2);
-  }
-
   // Instructions
   fill(0);
   text("Click to place food.  'w'/'f' to toggle wall building / feeding.  'r' to reset.", 10, height-gridSnap/4);
@@ -89,43 +62,23 @@ void draw() {
   for (int i = 0; i < creatures.size (); i++) {
     c = creatures.get(i);
     // Path following and separation are worked on in this function
-    c.applyBehaviors(creatures, walls);
+    c.applyBehaviors(creatures);
     // Call the generic run method (update, borders, display, etc.)
     c.update();
     c.display();
     // if creature falls outside then kill it
- /*   PVector theLoc = c.getLoc();
-    if ( (theLoc.x < gridSnap) || (theLoc.x > (width-gridSnap)) || (theLoc.y < gridSnap) || (theLoc.y > (height-gridSnap)) ) {
-      creatures.remove(i);
-    }*/
+    /*   PVector theLoc = c.getLoc();
+     if ( (theLoc.x < gridSnap) || (theLoc.x > (width-gridSnap)) || (theLoc.y < gridSnap) || (theLoc.y > (height-gridSnap)) ) {
+     creatures.remove(i);
+     }*/
   }
 
-  for (Wall w : walls) {
-    w.display();
-  }
-
-  if (creatingWall == true) {
-    line(wallx1, wally1, mouseX, mouseY);
-  }
 
 
   if (mousePressed) {
     if (wallBuildingMode == false) {
       addTarget(mouseX, mouseY);
-    } else {
-      if (creatingWall == false) {
-        creatingWall = true;
-        wallx1 = mouseX;
-        wally1 = mouseY;
-      } else {
-        wallx2 = mouseX;
-        wally2 = mouseY;
-        if ( (abs(wally2-wally1) > gridSnap) || (abs(wallx2-wallx1) > gridSnap) ) {
-          creatingWall = false;
-          walls.add( new Wall(wallx1, wally1, wallx2, wally2) );
-        }
-      }
-    }
+    } 
   }
 }
 
@@ -157,34 +110,6 @@ boolean detectTarget(float x, float y) {
   }
   return false;
 }
-
-class Wall {
-  PVector loc1;
-  PVector loc2;
-  color wallColor;
-
-
-  Wall(float x1, float y1, float x2, float y2) {
-    wallColor = color(127);
-    loc1 = new PVector(round(x1/gridSnap)*gridSnap, round(y1/gridSnap)*gridSnap);
-    loc2 = new PVector(round(x2/gridSnap)*gridSnap, round(y2/gridSnap)*gridSnap);
-  }
-
-  void display() {
-
-    stroke(wallColor);
-    line(loc1.x, loc1.y, loc2.x, loc2.y);
-  }
-
-  void setColorBlack() {
-    wallColor = color(100);
-  }
-
-  void setColorRed() {
-    wallColor = color(255, 0, 0);
-  }
-}
-
 class Creature {
 
   // All the usual stuff
@@ -271,9 +196,9 @@ class Creature {
   }
 
 
-  void applyBehaviors(ArrayList<Creature> creatures, ArrayList<Wall> walls) {
+  void applyBehaviors(ArrayList<Creature> creatures) {
 
-    PVector separateForce = separate(creatures, walls);
+    PVector separateForce = separate(creatures);
     PVector theTarget = getClosestTarget(creatures, loc, creatureType);
 
     if (theTarget == null) {
@@ -287,8 +212,6 @@ class Creature {
     seekForce.mult(1);
     applyForce(separateForce);
     applyForce(seekForce);
-
-    //collideWall(walls); // debug
   }
 
   // A method that calculates a steering force towards a target
@@ -310,7 +233,7 @@ class Creature {
 
   // Separation
   // Method checks for nearby creatures and steers away
-  PVector separate (ArrayList<Creature> creatures, ArrayList<Wall> walls) {
+  PVector separate (ArrayList<Creature> creatures) {
     float desiredseparation = r*2;
     PVector sum = new PVector();
     int count = 0;
@@ -337,20 +260,7 @@ class Creature {
 
     // for each wall, check to see if it is too close
     desiredseparation = r;
-    PVector closest;
-    for (Wall w : walls) {
-      //if ( isCollision(w.loc1.x, w.loc1.y, w.loc2.x, w.loc2.y, location.x, location.y, r) ) {
-      closest = getClosestPointToCenter(w.loc1.x, w.loc1.y, w.loc2.x, w.loc2.y, loc.x, loc.y, r);
-      float d = closest.dist(loc, closest);
-      if ( d <= desiredseparation ) {
-        // Calculate vector pointing away from neighbor
-        PVector diff = PVector.sub(loc, closest);
-        diff.normalize();
-        diff.div(d);        // Weight by distance
-        sum.add(diff);
-        count++;            // Keep track of how many
-      }
-    }   
+    PVector closest;  
 
     // Average -- divide by how many
     if (count > 0) {
@@ -364,22 +274,6 @@ class Creature {
     }
     return sum;
   }
-
-  // if creature collides with wall, then bounce away
-  void collideWall(ArrayList<Wall> walls) {
-    PVector closest;
-    for (Wall w : walls) {
-      //if ( isCollision(w.loc1.x, w.loc1.y, w.loc2.x, w.loc2.y, location.x, location.y, r) ) {
-      closest = getClosestPointToCenter(w.loc1.x, w.loc1.y, w.loc2.x, w.loc2.y, loc.x, loc.y, r);
-      if ( closest.dist(loc, closest) <= r ) {
-        w.setColorRed();
-      } else {
-        w.setColorBlack();
-      }
-    }
-  }
-
-
 
   // Method to update location
   void update() {
