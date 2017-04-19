@@ -3,13 +3,19 @@ creature c;
 ArrayList <creature> creature;
 ArrayList <vegetation> vegetation;
 void setup(){
-  v = new vegetation(15, 15);
-  c = new creature(15, 15, false);
+  creature = new ArrayList<creature>();
+  vegetation = new ArrayList<vegetation>();
   fullScreen();
-  
+  frameRate(100);  
 }
 
 void draw(){
-  
+  background(71);
+  for(creature c: creature){
+    c.display();
+  }
+  for(vegetation v: vegetation) {
+    v.display();
+  }
 
 }
