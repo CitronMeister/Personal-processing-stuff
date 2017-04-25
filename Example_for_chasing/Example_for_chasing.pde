@@ -137,14 +137,14 @@ class Creature {
     nMembranePoints = 32; // make this even number, preferably 2^n
     creatureType = theCreatureType;
 
-    // make it look like a funky creature
-    bodyColor = color(random(255), random(255), random(255)); // set a random color
-    if (theCreatureType == PREY) {
-      bodyColor = color(0, random(200, 255), 0); // set a random color
-      maxforce /= 4;
-      maxspeed /= 4;
-      nMembranePoints /= 2;
-    }
+    //// make it look like a funky creature
+    //bodyColor = color(random(255), random(255), random(255)); // set a random color
+    //if (theCreatureType == PREY) {
+    //  bodyColor = color(0, random(200, 255), 0); // set a random color
+    //  maxforce /= 4;
+    //  maxspeed /= 4;
+    //  nMembranePoints /= 2;
+    //}
     // precalc location for random membrane
 
     membraneDeviation = new float[nMembranePoints];

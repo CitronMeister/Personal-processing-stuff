@@ -1,7 +1,9 @@
-vegetation v;
+vegetation v = new vegetation(1,1);
 creature c;
+PVector mouse;
 ArrayList <creature> creature;
 ArrayList <vegetation> vegetation;
+
 void setup(){
   creature = new ArrayList<creature>();
   vegetation = new ArrayList<vegetation>();
@@ -11,8 +13,15 @@ void setup(){
 
 void draw(){
   background(71);
+  mouse = new PVector(mouseX, mouseY);
+  if(vegetation.size() < 100) {
+    grow(1);
+  }
   for(creature c: creature){
     c.display();
+    c.update();
+    c.target();
+    c.searchFood();
   }
   for(vegetation v: vegetation) {
     v.display();
