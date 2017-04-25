@@ -2,7 +2,7 @@
 
 void mousePressed() {
   if (mousePressed) {
-    creature.add(new hare(mouse));
+    creature.add(new creature(mouseX, mouseY));
   }
 }
 void grow(int growSpeed) {

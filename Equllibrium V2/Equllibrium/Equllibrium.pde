@@ -15,7 +15,7 @@ void setup(){
 void draw(){
   background(71);
   mouse = new PVector(mouseX, mouseY);
-  if(vegetation.size() < 100) {
+  if(vegetation.size() < 10) {
     grow(1);
   }
   for(creature c: creature){

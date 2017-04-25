@@ -5,7 +5,7 @@ class creature {
   PVector velocity;
   PVector acceleration;
   PVector target;
-  float maxForce, maxSpeed;
+  float maxForce = 10, maxSpeed = 10;
   creature(float cx, float cy) {
     loc = new PVector(cx, cy);
     acceleration = new PVector(0, 0);
@@ -24,8 +24,8 @@ class creature {
     PVector bestTarget = null;
     float d;
     float closest = 100000.0;
-    for (int i = 0; i < creature.size (); i++) {
-      theTarget = creature.get(i).getLoc();
+    for (int i = 0; i < vegetation.size (); i++) {
+      theTarget = vegetation.get(i).getLoc();
       d = theTarget.dist(currentLocation, theTarget);
       if (d < closest) {
         bestTarget = theTarget;
