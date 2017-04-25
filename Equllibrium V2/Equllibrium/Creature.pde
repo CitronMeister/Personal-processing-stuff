@@ -5,7 +5,7 @@ class creature {
   PVector velocity;
   PVector acceleration;
   PVector target;
-  float maxForce = 10, maxSpeed = 10;
+  float maxForce = 0.1, maxSpeed = 4;
   creature(float cx, float cy) {
     loc = new PVector(cx, cy);
     acceleration = new PVector(0, 0);
