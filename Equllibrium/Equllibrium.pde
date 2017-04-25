@@ -35,15 +35,14 @@ void draw() {
       c.display();
       c.update();
       c.target(target);
-      c.distance();
+      //c.distance();
     }
     // Update vegetation
-    if(vegetation.size() < 100){
+    if (vegetation.size() < 100) {
       grow(1);
     }
     for (vegetation v : vegetation) {
       v.display();
-      
     }
     // check if you are spawning vegetation or a creature
     foodToCreature();

@@ -14,7 +14,7 @@ class creature {
     velocity = new PVector(0, 0);
     location = new PVector(cx, cy);
     size = 50; // size is how big the Creature is currently not scalable.
-    maxForce = 0.1; // this defines how responsive the Creature can be. The higher the more reponsive.
+    maxForce = 0.1; // this defines how responsive the Creature can be. The higher the more reponsive. (TurnRate)
     maxSpeed = 4; // maxSpeed defines how fast the Creature goes, but its downside is it wont make it turn faster making it less responsive
   }
   // update function that makes sure the creatures' position are constantly being updated.

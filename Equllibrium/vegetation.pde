@@ -1,4 +1,5 @@
 // Currently vegetation is only for show. Creatures wont chase it just yet.
+// vegetation is currently rendered before the creatures.
 class vegetation {
   PVector foodLocation;
   float x;
