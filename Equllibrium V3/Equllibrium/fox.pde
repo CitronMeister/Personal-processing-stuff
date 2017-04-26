@@ -63,6 +63,41 @@ class fox {
     applyForce(steer);
     return steer;
   }
+    PVector separate (ArrayList<fox> fox) {
+    float desiredseparation = r*2;
+    PVector sum = new PVector();
+    int count = 0;
+    // For every boid in the system, check if it's too close
+    fox other;
+    for (int i = 0; i < fox.size(); i++) {
+      other = fox.get(i);
+      float d = PVector.dist(loc, other.loc);
+      desiredseparation = r + other.r;
+      // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
+      if ((d > 0) && (d < desiredseparation) ) {
+        if (myType == other.myType) {
+          // Calculate vector pointing away from neighbor
+          PVector diff = PVector.sub(loc, other.loc);
+          diff.normalize();
+          diff.div(d);        // Weight by distance
+          sum.add(diff);
+          count++;            // Keep track of how many
+        }
+      }
+    } 
+
+    // Average -- divide by how many
+    if (count > 0) {
+      sum.div(count);
+      // Our desired vector is the average scaled to maximum speed
+      sum.normalize();
+      sum.mult(maxSpeed);
+      // Implement Reynolds: Steering = Desired - Velocity
+      sum.sub(velocity);
+      sum.limit(maxForce);
+    }
+    return sum;
+  }
   void update() {
     velocity.add(acceleration);
     loc.add(velocity);

@@ -6,7 +6,7 @@ class hare {
   PVector target;
   int myType = 0;
   float r = 10;
-  float maxForce = 0.1, maxSpeed = 4;
+  float maxForce = 0.1, maxSpeed = 3;
 
   hare(float cx, float cy) {
     loc = new PVector(cx, cy);
@@ -38,8 +38,13 @@ class hare {
     }
     return bestTarget;
   }
+
+
+
+
   void applyBehaviors(ArrayList<hare> hare) {
     PVector theTarget; 
+    PVector separateForce = separate(hare);
     theTarget = getClosestTarget(vegetation, loc);
     if (theTarget == null) {
       theTarget = loc;
@@ -49,6 +54,10 @@ class hare {
     //line(loc.x, loc.y, theTarget.x, theTarget.y); // debug
     seekForce.mult(1);
     applyForce(seekForce);
+    separateForce.mult(2);
+    applyForce(separateForce);
+    
+    
   }
 
   PVector seek(PVector theTarget) {
@@ -60,6 +69,42 @@ class hare {
     applyForce(steer);
     return steer;
   }
+  PVector separate (ArrayList<hare> hare) {
+    float desiredseparation = r*2;
+    PVector sum = new PVector();
+    int count = 0;
+    // For every boid in the system, check if it's too close
+    hare other;
+    for (int i = 0; i < hare.size(); i++) {
+      other = hare.get(i);
+      float d = PVector.dist(loc, other.loc);
+      desiredseparation = r + other.r;
+      // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
+      if ((d > 0) && (d < desiredseparation) ) {
+        if (myType == other.myType) {
+          // Calculate vector pointing away from neighbor
+          PVector diff = PVector.sub(loc, other.loc);
+          diff.normalize();
+          diff.div(d);        // Weight by distance
+          sum.add(diff);
+          count++;            // Keep track of how many
+        }
+      }
+    } 
+
+    // Average -- divide by how many
+    if (count > 0) {
+      sum.div(count);
+      // Our desired vector is the average scaled to maximum speed
+      sum.normalize();
+      sum.mult(maxSpeed);
+      // Implement Reynolds: Steering = Desired - Velocity
+      sum.sub(velocity);
+      sum.limit(maxForce);
+    }
+    return sum;
+  }
+
   void update() {
     velocity.add(acceleration);
     loc.add(velocity);
@@ -74,5 +119,5 @@ class hare {
   }
   int foodeaten() {
     return foodcount;
-  }  
+  }
 }
