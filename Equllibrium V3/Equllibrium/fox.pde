@@ -4,8 +4,9 @@ class fox {
   PVector acceleration;
   PVector target;
   int myType = 0;
+  int hunger = 1000;
   float r = 10;
-  float maxForce = 0.2, maxSpeed = 5;
+  float maxForce = 0.2, maxSpeed = 1;
 
   fox(float cx, float cy) {
     loc = new PVector(cx, cy);
@@ -17,6 +18,10 @@ class fox {
   }
   PVector getLoc() {
     return loc;
+  }
+  void hunger(){
+    hunger--;
+    text("hunger: " + hunger, loc.x, loc.y);
   }
   PVector getClosestTarget(ArrayList<hare> hare, PVector currentLocation) {
     PVector theTarget;
@@ -69,5 +74,5 @@ class fox {
     fill(#FAA803);
     ellipse(loc.x, loc.y, r*2, r*2);
     popStyle();
-  }  
+  }
 }

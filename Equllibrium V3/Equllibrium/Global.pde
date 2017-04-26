@@ -1,6 +1,6 @@
 // Global variable
 int alpha1 = 50;
-int randomnumber = 1;
+boolean fox3 = false;
 //Global function
 void mousePressed() {
   if (gamemode == 1) {
@@ -9,10 +9,9 @@ void mousePressed() {
     }
   } else if (gamemode == 2) {
     if (mousePressed) {
-      randomnumber++;
-      if (mousePressed && randomnumber < 10000) {
+      if (mousePressed && fox3 == false) {
         hare.add(new hare(mouseX, mouseY));
-      } else if(mousePressed && randomnumber > 5){
+      } else if(mousePressed && fox3 == true){
         fox.add(new fox(mouseX, mouseY));
       }
     }
@@ -29,7 +28,44 @@ void hover() {
   } else {
     alpha1 = 50;
   }
-} 
+}
+void newHare() {
+    int x;
+    int y = 0;
+    PVector a;
+    PVector b = null;
+    for(int i = 0; i < hare.size(); i++){
+      a = hare.get(i).getLoc();
+      b = a;
+    }    
+    for (int i = 0; i < hare.size(); i++) {
+      x = hare.get(i).foodcount;
+      if (x >= 10) {
+        x = y;
+        hare.remove(i);
+        hare.add(new hare(b.x, b.y));
+        hare.add(new hare(b.x + random(-50, 50), b.y + random(-50, 50)));
+      }
+    }
+  }
+void killFox(){
+  int x;
+  int y = 0;
+  PVector a;
+  PVector b = null;
+  //for(int i = 0; i < fox.size(); i++){
+  //  a = fox.get(i).getLoc();
+  //  b = a;
+  //}
+  for (int i = 0; i < fox.size(); i++){
+    x = fox.get(i).hunger;
+    if(x < 1){
+      fox.remove(i);
+    }
+  }
+}
+
+
 void menu() {
   background(80);
   pushStyle();

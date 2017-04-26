@@ -6,7 +6,7 @@ class hare {
   PVector target;
   int myType = 0;
   float r = 10;
-  float maxForce = 0.1, maxSpeed = 4;
+  float maxForce = 1, maxSpeed = 10;
 
   hare(float cx, float cy) {
     loc = new PVector(cx, cy);
@@ -68,16 +68,17 @@ class hare {
   void display() {
     pushStyle();
     noStroke();
-    ellipse(loc.x, loc.y, r*2, r*2);
+    ellipse(loc.x, loc.y, r*2 + foodcount*5, r*2 + foodcount*5);
     popStyle();
   }
   int foodeaten() {
     return foodcount;
   }
-
-  void evolve() {
-    if (foodcount > 9){
-      fox.add(new fox(loc.x, loc.y));
-    }
-  }
+  
+  //void evolve() {
+  //  if (foodcount == 10) {      
+  //    createNewHare();      
+  //    foodcount = 0;
+  //  }
+  //}
 }

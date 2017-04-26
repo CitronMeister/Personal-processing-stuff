@@ -1,3 +1,4 @@
+hare h;
 import processing.sound.*;
 vegetation v = new vegetation(1, 1);
 // PVector for testing
@@ -38,18 +39,23 @@ void draw() {
       grow(1);
     }
     // creature functions.
+    newHare();
+    killFox();
+    
     for (hare h : hare) {
       h.display();
       // update location and velocity
       h.update();
       //tell the creature which target it should go for.
       h.applyBehaviors(hare);
-      h.evolve();
+      //h.evolve();
+      
     }
     for (fox f: fox){
       f.display();
       f.update();
       f.applyBehaviors(fox);
+      f.hunger();
     }
     // functions that has to run for vegetation.
     for (vegetation v : vegetation) {
