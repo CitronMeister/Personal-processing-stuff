@@ -6,7 +6,7 @@ class hare {
   PVector target;
   int myType = 0;
   float r = 10;
-  float maxForce = 0.1, maxSpeed = 3;
+  float maxForce = 0.1, maxSpeed = 3/2;
 
   hare(float cx, float cy) {
     loc = new PVector(cx, cy);

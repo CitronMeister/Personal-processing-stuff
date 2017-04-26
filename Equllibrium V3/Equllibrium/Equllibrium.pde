@@ -19,7 +19,7 @@ void setup() {
   fox = new ArrayList<fox>();
   //setting the gamemode to 1 for the menu
   gamemode = 1;
-  fullScreen();
+  fullScreen(2);
   //FrameRate set to 100 for faster updates.
   frameRate(100);
 }
@@ -43,6 +43,11 @@ void draw() {
     killFox();
     foodToCreature();
     
+    // functions that has to run for vegetation.
+    for (vegetation v : vegetation) {
+      v.display();
+    }
+    
     for (hare h : hare) {
       h.display();
       // update location and velocity
@@ -57,10 +62,6 @@ void draw() {
       f.update();
       f.applyBehaviors(fox);
       f.hunger();
-    }
-    // functions that has to run for vegetation.
-    for (vegetation v : vegetation) {
-      v.display();
-    }
+    }    
   }
 }

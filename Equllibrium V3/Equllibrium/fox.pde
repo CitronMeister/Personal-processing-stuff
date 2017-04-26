@@ -4,9 +4,9 @@ class fox {
   PVector acceleration;
   PVector target;
   int myType = 0;
-  int hunger = 500;
-  float r = 10;
-  float maxForce = 0.1, maxSpeed = 4.5;
+  int hunger = 1000;
+  float r = 25;
+  float maxForce = 0.2, maxSpeed = 2.8/2;
 
   fox(float cx, float cy) {
     loc = new PVector(cx, cy);
@@ -106,7 +106,7 @@ class fox {
   void display() {
     pushStyle();
     noStroke();
-    fill(#FAA803, 100);
+    fill(#FAA803);
     ellipse(loc.x, loc.y, r*2, r*2);
     popStyle();
   }
