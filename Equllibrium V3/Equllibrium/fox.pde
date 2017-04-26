@@ -4,7 +4,7 @@ class fox {
   PVector acceleration;
   PVector target;
   int myType = 0;
-  int hunger = 1000;
+  int hunger = 500;
   float r = 10;
   float maxForce = 0.1, maxSpeed = 4.5;
 
@@ -35,7 +35,7 @@ class fox {
         closest = d;
       }
       if (d < 10) {
-        hunger = 1000;
+        hunger = 500;
         hare.remove(i);
       }
     }
