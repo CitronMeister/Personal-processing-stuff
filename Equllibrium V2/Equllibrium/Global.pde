@@ -1,6 +1,6 @@
 // Global variable
 int alpha1 = 50;
-
+int randomnumber = 1;
 //Global function
 void mousePressed() {
   if (gamemode == 1) {
@@ -9,7 +9,12 @@ void mousePressed() {
     }
   } else if (gamemode == 2) {
     if (mousePressed) {
-      creature.add(new creature(mouseX, mouseY));
+      randomnumber++;
+      if (mousePressed && randomnumber < 5) {
+        creature.add(new hare(mouse));
+      } else if(mousePressed && randomnumber > 5){
+        creature.add(new fox(mouse));
+      }
     }
   }
 } 
@@ -20,12 +25,12 @@ void grow(int growSpeed) {
     vegetation.add(new vegetation(random(width), random(height)));
   }
 }
-void hover(){
-if (mouseX > width/2 - width/8 + width/16 && mouseX < width/2 + width/8 - width/16 && mouseY > height/2 - height/12 + height/24 && mouseY < height/2 + height/12 - height/24) {
-      alpha1 = 200;
-    } else {
-      alpha1 = 50;
-    }
+void hover() {
+  if (mouseX > width/2 - width/8 + width/16 && mouseX < width/2 + width/8 - width/16 && mouseY > height/2 - height/12 + height/24 && mouseY < height/2 + height/12 - height/24) {
+    alpha1 = 200;
+  } else {
+    alpha1 = 50;
+  }
 } 
 void menu() {
   background(80);
@@ -34,7 +39,7 @@ void menu() {
   fill(#00BC20, alpha1);
   rect(width/2 - width/8 + width/16, height/2 - height/12 + height/24, width/8, height/12);
   popStyle();
-  
+
   pushStyle();
   textSize(30);
   textAlign(CENTER);
