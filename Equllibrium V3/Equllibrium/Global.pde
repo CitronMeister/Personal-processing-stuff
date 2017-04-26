@@ -1,6 +1,6 @@
 // Global variable
 int alpha1 = 50;
-boolean fox3 = true;
+boolean fox3 = false;
 //Global function
 void mousePressed() {
   if (gamemode == 1) {
@@ -53,9 +53,9 @@ void newHare() {
       x = hare.get(i).foodcount;
       if (x >= 10) {
         x = y;
-        hare.remove(i);
         hare.add(new hare(b.x, b.y));
         hare.add(new hare(b.x + random(-50, 50), b.y + random(-50, 50)));
+        hare.remove(i);
       }
     }
   }

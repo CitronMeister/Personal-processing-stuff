@@ -21,7 +21,6 @@ class fox {
   }
   void hunger(){
     hunger--;
-    text("hunger: " + hunger, loc.x, loc.y);
   }
   PVector getClosestTarget(ArrayList<hare> hare, PVector currentLocation) {
     PVector theTarget;
