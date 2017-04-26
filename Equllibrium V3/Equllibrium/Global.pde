@@ -1,6 +1,6 @@
 // Global variable
 int alpha1 = 50;
-boolean fox3 = false;
+boolean fox3 = true;
 //Global function
 void mousePressed() {
   if (gamemode == 1) {
@@ -22,6 +22,17 @@ void grow(int growSpeed) {
     vegetation.add(new vegetation(random(width), random(height)));
   }
 }
+void foodToCreature() {
+  if (keyPressed) {
+    if (key == 'c') {
+      fox3 = false;
+    } else if (key == 'f') {
+      fox3 = true;
+    }
+  }
+}
+
+
 void hover() {
   if (mouseX > width/2 - width/8 + width/16 && mouseX < width/2 + width/8 - width/16 && mouseY > height/2 - height/12 + height/24 && mouseY < height/2 + height/12 - height/24) {
     alpha1 = 200;

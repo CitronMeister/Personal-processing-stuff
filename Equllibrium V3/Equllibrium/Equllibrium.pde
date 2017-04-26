@@ -41,6 +41,7 @@ void draw() {
     // creature functions.
     newHare();
     killFox();
+    foodToCreature();
     
     for (hare h : hare) {
       h.display();

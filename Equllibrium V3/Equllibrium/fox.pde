@@ -6,7 +6,7 @@ class fox {
   int myType = 0;
   int hunger = 1000;
   float r = 10;
-  float maxForce = 0.2, maxSpeed = 1;
+  float maxForce = 0.1, maxSpeed = 4.5;
 
   fox(float cx, float cy) {
     loc = new PVector(cx, cy);
@@ -36,6 +36,7 @@ class fox {
         closest = d;
       }
       if (d < 10) {
+        hunger = 1000;
         hare.remove(i);
       }
     }
@@ -71,7 +72,7 @@ class fox {
   void display() {
     pushStyle();
     noStroke();
-    fill(#FAA803);
+    fill(#FAA803, 100);
     ellipse(loc.x, loc.y, r*2, r*2);
     popStyle();
   }
