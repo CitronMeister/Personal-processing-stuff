@@ -1,11 +1,11 @@
-// the general creature class which will have children in form of different species
+// The creature class
 class creature {
 
   PVector loc;
   PVector velocity;
   PVector acceleration;
   PVector target;
-  float maxForce = 0.1, maxSpeed = 4;
+  float maxForce = 1, maxSpeed = 2;
   creature(float cx, float cy) {
     loc = new PVector(cx, cy);
     acceleration = new PVector(0, 0);
@@ -30,6 +30,9 @@ class creature {
       if (d < closest) {
         bestTarget = theTarget;
         closest = d;
+      }
+      if (d < 10) {
+        vegetation.remove(i);
       }
     }
     return bestTarget;
@@ -63,25 +66,11 @@ class creature {
     loc.add(velocity);
     acceleration.mult(0);
   }
-  
+
   void display() {
     pushStyle();
     noStroke();
     ellipse(loc.x, loc.y, 15, 15);
     popStyle();
-  }
-}
-class hare extends creature {
-  color c;
-
-  hare(PVector loc) {
-    super(loc.x, loc.y);
-    maxSpeed = 4;
-    maxForce = 0.1;
-  }
-}  
-class fox extends creature {
-  fox(PVector loc) {
-    super(loc.x, loc.y);
   }
 }
